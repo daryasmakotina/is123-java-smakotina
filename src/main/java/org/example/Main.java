@@ -32,9 +32,9 @@ public class Main {
         // Сортировка
         algorithm.sort(data, visualizer);
 
-        // СОХРАНЕНИЕ РЕЗУЛЬТАТА
-        DataSaver saver = new JsonDataSaver();
-        saver.save(data, outputFilePath);
+        // Сохраняем результат
+        DataSaver saver = DataSaverFactory.create(args[3]);
+        saver.save(data, args[3]);
 
         System.out.println("Сортировка завершена.");
         System.out.println("Результат сохранён в файл: " + outputFilePath);
