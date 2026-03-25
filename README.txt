@@ -11,3 +11,6 @@ java -jar target/smakotina_kyrsovaya_java-1.0-SNAPSHOT.jar --help
 Проверка ошибки алгоритма
 java -jar target/smakotina_kyrsovaya_java-1.0-SNAPSHOT.jar forjson.json wrong console result.json
 
+запуск программы
+mvn javafx:run
+

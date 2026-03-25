@@ -1,7 +1,6 @@
 package org.example.visualization;
 
 import org.example.algorithm.SortObserver;
-
 import java.util.Arrays;
 
 public class ConsoleVisualizer implements SortObserver {
@@ -11,7 +10,7 @@ public class ConsoleVisualizer implements SortObserver {
         System.out.println(Arrays.toString(array));
 
         try {
-            Thread.sleep(300); // пауза 300 мс для наглядности
+            Thread.sleep(300);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }

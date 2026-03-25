@@ -10,9 +10,7 @@ public class QuickSort implements SortAlgorithm {
     private void quickSort(int[] array, int low, int high, SortObserver observer) {
 
         if (low < high) {
-
             int pi = partition(array, low, high, observer);
-
             quickSort(array, low, pi - 1, observer);
             quickSort(array, pi + 1, high, observer);
         }
@@ -25,15 +23,16 @@ public class QuickSort implements SortAlgorithm {
 
         for (int j = low; j < high; j++) {
 
+            // подсветка сравниваемых элементов
+            observer.update(array.clone(), j, high);
+
             if (array[j] < pivot) {
-
                 i++;
-
                 int temp = array[i];
                 array[i] = array[j];
                 array[j] = temp;
 
-                observer.update(array.clone());
+                observer.update(array.clone(), i, j);
             }
         }
 
@@ -41,7 +40,7 @@ public class QuickSort implements SortAlgorithm {
         array[i + 1] = array[high];
         array[high] = temp;
 
-        observer.update(array.clone());
+        observer.update(array.clone(), i + 1, high);
 
         return i + 1;
     }
