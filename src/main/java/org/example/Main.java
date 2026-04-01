@@ -36,7 +36,7 @@ public class Main {
             SortAlgorithm algorithm = AlgorithmFactory.create(algorithmName);
 
             // Выбор визуализации
-            SortObserver visualizer = VisualizerFactory.create(visualizationType);
+            SortObserver visualizer = VisualizerFactory.create(visualizationType, data);
 
             // Сортировка
             algorithm.sort(data, visualizer);
