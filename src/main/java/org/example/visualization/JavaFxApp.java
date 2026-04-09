@@ -5,11 +5,14 @@ import javafx.application.Platform;
 import javafx.stage.Stage;
 import javafx.stage.FileChooser;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
+import javafx.scene.control.*;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 
 import org.example.algorithm.*;
 import org.example.factory.*;
@@ -40,9 +43,21 @@ public class JavaFxApp extends Application implements SortObserver {
 
         ComboBox<String> algorithmBox = new ComboBox<>();
         Button startButton = new Button("Начать сортировку");
+        fileButton.setStyle("-fx-font-size:14px;");
+        saveButton.setStyle("-fx-font-size:14px;");
+        startButton.setStyle(
+                "-fx-background-color:#4CAF50;" +
+                        "-fx-text-fill:white;" +
+                        "-fx-font-weight:bold;"
+        );
 
         Label speedLabel = new Label("Скорость");
         drawPane.setPrefSize(800, 500);
+        drawPane.setStyle(
+                "-fx-background-color:#f4f4f4;" +
+                        "-fx-border-color:#cccccc;" +
+                        "-fx-border-width:1;"
+        );
 
         algorithmBox.getItems().addAll("quick", "bubble", "selection");
         algorithmBox.setValue("quick");
@@ -103,18 +118,24 @@ public class JavaFxApp extends Application implements SortObserver {
             }).start();
         });
 
-        VBox root = new VBox(10,
-                fileButton,
-                saveButton,
-                outputField,
-                algorithmBox,
-                speedLabel,
-                speedSlider,
-                startButton,
-                drawPane
-        );
+        BorderPane root = new BorderPane();
 
-        Scene scene = new Scene(root, 800, 600);
+        Label title = new Label("Sorting Visualizer");
+        title.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
+
+        HBox topBar = new HBox(10, fileButton, saveButton, algorithmBox, startButton);
+        topBar.setStyle("-fx-padding: 10; -fx-alignment: center;");
+
+        HBox speedBar = new HBox(10, speedLabel, speedSlider);
+        speedBar.setStyle("-fx-padding: 10; -fx-alignment: center;");
+
+        VBox controls = new VBox(5, title, topBar, speedBar, outputField);
+        controls.setStyle("-fx-padding: 10; -fx-alignment: center;");
+
+        root.setTop(controls);
+        root.setCenter(drawPane);
+
+        Scene scene = new Scene(root, 900, 650);
 
         stage.setTitle("Sorting Visualizer");
         stage.setScene(scene);
@@ -130,6 +151,8 @@ public class JavaFxApp extends Application implements SortObserver {
 
             double paneWidth = drawPane.getWidth() > 0 ? drawPane.getWidth() : 800;
             double paneHeight = drawPane.getHeight() > 0 ? drawPane.getHeight() : 500;
+            double topPadding = 40; // пространство сверху
+            paneHeight -= topPadding;
 
             double width = paneWidth / array.length;
 
@@ -141,21 +164,29 @@ public class JavaFxApp extends Application implements SortObserver {
 
                 Rectangle rect = new Rectangle(
                         i * width,
-                        paneHeight - height,
-                        width - 2,
+                        paneHeight - height + topPadding,
+                        width - 4,
                         height
                 );
 
+                // мягкие цвета
                 if (i == index1 || i == index2) {
-                    rect.setFill(Color.RED);
+                    rect.setFill(Color.web("#ff6b6b")); // мягкий красный
                 } else {
-                    rect.setFill(Color.BLUE);
+                    rect.setFill(Color.web("#5c7cfa")); // мягкий синий
                 }
 
                 bars.add(rect);
-            }
 
-            drawPane.getChildren().addAll(bars);
+                // текст числа
+                Text text = new Text(
+                        i * width + width / 4,
+                        paneHeight - height + topPadding - 5,
+                        String.valueOf(array[i])
+                );
+
+                drawPane.getChildren().addAll(rect, text);
+            }
         });
     }
 
