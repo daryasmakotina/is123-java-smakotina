@@ -4,21 +4,28 @@ import org.example.algorithm.SortObserver;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Arrays;
 
-public class SwingVisualizer extends JPanel implements SortObserver {
+public class SwingVisualizer extends JFrame implements SortObserver {
 
     private int[] array;
     private int index1 = -1;
     private int index2 = -1;
 
+    private final DrawPanel panel = new DrawPanel();
+
     public SwingVisualizer(int[] data) {
+
         this.array = data;
 
-        JFrame frame = new JFrame("Swing Sorting Visualizer");
-        frame.setSize(800, 600);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(this);
-        frame.setVisible(true);
+        setTitle("Sorting Visualizer (Swing)");
+        setSize(900, 600);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+
+        add(panel);
+
+        setVisible(true);
     }
 
     @Override
@@ -28,43 +35,47 @@ public class SwingVisualizer extends JPanel implements SortObserver {
         this.index1 = i;
         this.index2 = j;
 
-        repaint();
+        panel.repaint();
 
         try {
-            Thread.sleep(100);
+            Thread.sleep(80);
         } catch (InterruptedException ignored) {}
     }
 
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
+    class DrawPanel extends JPanel {
 
-        if (array == null) return;
+        @Override
+        protected void paintComponent(Graphics g) {
 
-        int width = getWidth() / array.length;
-        int height = getHeight();
+            super.paintComponent(g);
 
-        int max = 1;
-        for (int value : array) {
-            if (value > max) max = value;
-        }
+            if (array == null) return;
 
-        for (int i = 0; i < array.length; i++) {
+            int width = getWidth();
+            int height = getHeight();
 
-            int barHeight = (array[i] * height) / max;
+            int barWidth = width / array.length;
 
-            if (i == index1 || i == index2) {
-                g.setColor(Color.RED);
-            } else {
-                g.setColor(Color.BLUE);
+            int max = Arrays.stream(array).max().orElse(1);
+
+            for (int i = 0; i < array.length; i++) {
+
+                int barHeight = (array[i] * (height - 50)) / max;
+
+                int x = i * barWidth;
+                int y = height - barHeight;
+
+                if (i == index1 || i == index2) {
+                    g.setColor(new Color(169, 107, 255)); // мягкий красный
+                } else {
+                    g.setColor(new Color(92, 129, 250)); // мягкий синий
+                }
+
+                g.fillRect(x, y, barWidth - 2, barHeight);
+
+                g.setColor(Color.BLACK);
+                g.drawString(String.valueOf(array[i]), x + barWidth / 4, y - 5);
             }
-
-            g.fillRect(
-                    i * width,
-                    height - barHeight,
-                    width - 2,
-                    barHeight
-            );
         }
     }
 }

@@ -16,3 +16,4 @@ mvn javafx:run
 
 запуск Swing
 java -jar target/smakotina_kyrsovaya_java-1.0-SNAPSHOT.jar forjson.json quick swing result.json
+

@@ -169,7 +169,7 @@ public class JavaFxApp extends Application implements SortObserver {
                         height
                 );
 
-                // мягкие цвета
+                //цвета
                 if (i == index1 || i == index2) {
                     rect.setFill(Color.web("#ff6b6b")); // мягкий красный
                 } else {
