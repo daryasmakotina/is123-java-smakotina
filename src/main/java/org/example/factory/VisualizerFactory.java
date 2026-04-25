@@ -12,7 +12,7 @@ public class VisualizerFactory {
             case "console":
                 return new ConsoleVisualizer();
             case "swing":
-                return new SwingVisualizer(data);
+                return new SwingVisualizer();
             default:
                 throw new IllegalArgumentException("Неизвестный тип визуализации: " + type);
         }
