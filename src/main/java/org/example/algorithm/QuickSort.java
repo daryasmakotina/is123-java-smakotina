@@ -1,12 +1,10 @@
 package org.example.algorithm;
 
 public class QuickSort implements SortAlgorithm {
-
     @Override
     public void sort(int[] array, SortObserver observer) {
         quickSort(array, 0, array.length - 1, observer);
     }
-
     private void quickSort(int[] array, int low, int high, SortObserver observer) {
 
         if (low < high) {

@@ -11,12 +11,8 @@ public class CsvDataLoader implements DataLoader {
 
         try {
             String content = new String(Files.readAllBytes(Paths.get(filePath)));
-
-            // Убираем пробелы и переносы строк
             content = content.replaceAll("\\s", "");
-
             String[] numbers = content.split(",");
-
             int[] array = new int[numbers.length];
 
             for (int i = 0; i < numbers.length; i++) {

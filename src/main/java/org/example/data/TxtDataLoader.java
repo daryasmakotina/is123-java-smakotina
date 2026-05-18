@@ -13,14 +13,9 @@ public class TxtDataLoader implements DataLoader {
 
         try {
             String content = new String(Files.readAllBytes(Paths.get(filePath)));
-
-            // Удаляем BOM
             content = content.replace("\uFEFF", "");
-
             content = content.trim();
-
             String[] numbers = content.split(",");
-
             List<Integer> list = new ArrayList<>();
 
             for (String num : numbers) {

@@ -13,12 +13,9 @@ public class SwingVisualizer extends JFrame implements SortObserver {
 
     private int[] data;
     private String outputPath;
-
     private final DrawPanel drawPanel = new DrawPanel();
-
     private JComboBox<String> algorithmBox;
     private JSlider speedSlider;
-
     private int index1 = -1;
     private int index2 = -1;
 

@@ -47,7 +47,7 @@
 🔹 1. Сборка
 mvn clean package
 🔹 2. Запуск (консоль / Swing)
-java -jar target/smakotina_kyrsovaya_java-1.0-SNAPSHOT.jar input.json quick swing output.json
+java -jar target/smakotina_kyrsovaya_java-1.0-SNAPSHOT.jar forjson.json quick swing output.json
 java -jar target/smakotina_kyrsovaya_java-1.0-SNAPSHOT.jar forjson.json quick console result.json
 🔹 3. Запуск JavaFX
 mvn javafx:run

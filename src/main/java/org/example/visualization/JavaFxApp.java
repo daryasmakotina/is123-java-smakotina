@@ -148,37 +148,26 @@ public class JavaFxApp extends Application implements SortObserver {
 
             drawPane.getChildren().clear();
             bars.clear();
-
             double paneWidth = drawPane.getWidth() > 0 ? drawPane.getWidth() : 800;
             double paneHeight = drawPane.getHeight() > 0 ? drawPane.getHeight() : 500;
             double topPadding = 40; // пространство сверху
             paneHeight -= topPadding;
-
             double width = paneWidth / array.length;
-
             int max = java.util.Arrays.stream(array).max().orElse(1);
-
             for (int i = 0; i < array.length; i++) {
-
                 double height = (array[i] * paneHeight) / max;
-
                 Rectangle rect = new Rectangle(
                         i * width,
                         paneHeight - height + topPadding,
                         width - 4,
                         height
                 );
-
-                //цвета
                 if (i == index1 || i == index2) {
                     rect.setFill(Color.web("#ff6b6b")); // мягкий красный
                 } else {
                     rect.setFill(Color.web("#5c7cfa")); // мягкий синий
                 }
-
                 bars.add(rect);
-
-                // текст числа
                 Text text = new Text(
                         i * width + width / 4,
                         paneHeight - height + topPadding - 5,

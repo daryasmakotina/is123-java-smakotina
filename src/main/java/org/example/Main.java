@@ -10,19 +10,15 @@ public class Main {
     public static void main(String[] args) {
 
         try {
-
-            // Режим помощи
             if (args.length == 1 && args[0].equals("--help")) {
                 printHelp();
                 return;
             }
-
             if (args.length != 4) {
                 System.out.println("Ошибка: неверное количество аргументов.");
                 printHelp();
                 return;
             }
-
             String inputFile = args[0];
             String algorithmName = args[1];
             String visualizationType = args[2];
